@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\KokiController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
@@ -22,6 +23,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
+    Route::get('/admin/dashboard/food', [FoodController::class, 'index'])->name('food-dashboard');
+    Route::get('/admin/food/add-food/form', [FoodController::class, 'form'])->name('food-form');
+    Route::post('/admin-add-food', [FoodController::class, 'store'])->name('food-store');
+    Route::get('/admin/food/edit/{id}', [FoodController::class, 'edit'])->name('edit-form');
+    Route::patch('/food/{id}/update', [FoodController::class, 'storeEdit'])->name('food-edit-store');
+    Route::match(['get', 'post', 'delete'],'/delete/{id}', [FoodController::class, 'destroy'])->name('food-delete');
 });
 
 Route::middleware(['auth', 'role:manager'])->group(function () {
