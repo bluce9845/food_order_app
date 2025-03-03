@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('food_id')->constrained(
                 table: 'food', indexName: 'fd_id'
             )->onDelete('cascade');
-            $table->integer('count_order');
-            $table->string('amount_price');
-            $table->boolean('order_status');
-            $table->date('order_date');
+            $table->integer('count_order')->nullable();
+            $table->string('amount_price')->nullable();
+            $table->string('order_status')->default('pending')->nullable();
+            $table->date('order_date')->nullable();
             $table->timestamps();
         });
     }

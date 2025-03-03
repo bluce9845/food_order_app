@@ -15,4 +15,12 @@
     <a href="{{ route('food-dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
         Food
     </a>
+@elseif (Auth::user()->role === 'manager')
+
+@elseif (Auth::user()->role === 'chef')
+
+@else
+    <a href="{{ route('dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </a>
 @endif

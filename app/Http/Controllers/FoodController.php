@@ -30,7 +30,7 @@ class FoodController extends Controller
         ]);
 
         $image     = $request->file('image_food');
-        $imagePath = $image->storeAs('public/posts', $image->hashName(), 'public');
+        $imagePath = $image->storeAs('public', $image->hashName(), 'public');
 
         $validateData['image_food'] = $imagePath;
 
@@ -57,9 +57,9 @@ class FoodController extends Controller
 
         if($request->hasFile('image_food')){
             $image_food = $request->file('image_food');
-            $image_food->storeAs('public/posts', $image_food->hashName());
+            $image_food->storeAs('public', $image_food->hashName());
 
-            Storage::delete('public/posts'.$food->image_food);
+            Storage::delete('public'.$food->image_food);
 
             $food->update([
                 'food_name' => $request->food_name,
