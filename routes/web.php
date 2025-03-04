@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChefController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\KokiController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderProcessController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +36,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/dashboard', [ManagerController::class, 'dashboard'])->name('manager-dashboard');
+    Route::get('/manager/manage/order', [ManagerController::class, 'manageOrder'])->name('manager-manage-order');
 });
 
 Route::middleware(['auth', 'role:chef'])->group(function () {
-    Route::get('/chef/dashboard', [KokiController::class, 'dashboard'])->name('chef-dashboard');
+    Route::get('/chef/dashboard', [ChefController::class, 'dashboard'])->name('chef-dashboard');
+    Route::get('/chef/order/process', [ChefController::class, 'orderProcess'])->name('chef-order-process');
+    Route::match(['get', 'post', 'delete'],'/chef/order/{id}/process/completed', [OrderProcessController::class, 'orderProcesStore'])->name('order-process-store');
 });
 
 require __DIR__ . '/auth.php';

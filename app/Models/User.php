@@ -46,8 +46,14 @@ class User extends Authenticatable
         ];
     }
 
+      public function isAdmin()
+    {
+        return $this->role === 'admin'; 
+    }
+
     public function order(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
+
 }

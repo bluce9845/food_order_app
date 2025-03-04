@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_admin_id')->constrained(
                 table: 'users', indexName: 'admn_id'
             )->onDelete('cascade');
-            $table->boolean('status_order_process');
+            $table->string('status_order_process');
             $table->date('date_order_process');
             $table->timestamps();
         });

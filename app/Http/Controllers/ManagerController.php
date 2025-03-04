@@ -7,4 +7,9 @@ class ManagerController extends Controller
     {
         return view('manager.dashboard');
     }
+
+    public function manageOrder()
+    {
+        return view('manager.manageOrder.manageOrders');
+    }
 }
