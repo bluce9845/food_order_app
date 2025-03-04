@@ -16,9 +16,19 @@
         Food
     </a>
 @elseif (Auth::user()->role === 'manager')
-
+    <a href="{{ route('manager-dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </a>
+    <a href="{{ route('manager-manage-orders') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        manage orders
+    </a>
 @elseif (Auth::user()->role === 'chef')
-
+    <a href="{{ route('chef-dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </a>
+    <a href="{{ route('chef-order-process') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        Orders
+    </a>
 @else
     <a href="{{ route('dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
         {{ $slot }}
