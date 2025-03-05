@@ -36,7 +36,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/dashboard', [ManagerController::class, 'dashboard'])->name('manager-dashboard');
-    Route::get('/manager/manage/order', [ManagerController::class, 'manageOrder'])->name('manager-manage-order');
+    Route::get('/manager/report/order', [ManagerController::class, 'reportOrder'])->name('manager-report-order');
 });
 
 Route::middleware(['auth', 'role:chef'])->group(function () {

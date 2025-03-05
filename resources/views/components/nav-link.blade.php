@@ -19,8 +19,8 @@
     <a href="{{ route('manager-dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>
         {{ $slot }}
     </a>
-    <a href="{{ route('manager-manage-orders') }}" {{ $attributes->merge(['class' => $classes]) }}>
-        manage orders
+    <a href="{{ route('manager-report-order') }}" {{ $attributes->merge(['class' => $classes]) }}>
+        report orders
     </a>
 @elseif (Auth::user()->role === 'chef')
     <a href="{{ route('chef-dashboard') }}" {{ $attributes->merge(['class' => $classes]) }}>

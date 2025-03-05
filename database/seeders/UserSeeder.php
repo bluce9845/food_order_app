@@ -32,5 +32,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456'),
             'role'     => 'chef',
         ]);
+
+        User::create([
+            'name'     => 'rizki',
+            'email'    => 'rizki@gmail.com',
+            'password' => Hash::make('123456'),
+            'alamat' => 'Groogol.Dubai.Israel'
+        ]);
     }
 }

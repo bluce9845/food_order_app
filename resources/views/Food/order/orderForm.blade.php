@@ -34,6 +34,13 @@
         <label for="amount_price">Total Harga:</label>
         <input class="form-control" type="text" name="amount_price" id="amount_price" readonly>
 
+        <select name="payment" id="payment">
+            <option value="qris">Qris</option>
+            <option value="e-money">E-money</option>
+            <option value="credit">Credit</option>
+            <option value="cash">Cash</option>
+        </select>
+
         <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
 

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('report_order_monthlies', function (Blueprint $table) {
             $table->id();
-            $table->integer('monthly_report');
-            $table->integer('year_report');
-            $table->integer('count_order_from_month');
-            $table->integer('count_of_income');
+            $table->integer('month');
+            $table->integer('year');
+            $table->integer('total_order');
+            $table->integer('total_income');
             $table->timestamps();
         });
     }
