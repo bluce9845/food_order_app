@@ -2,32 +2,50 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-use HasFactory;
+    use HasFactory;
 
-protected $fillable = [
-'user_id',
-'food_id',
-'count_order',
-'amount_price',
-'order_date',
-'order_status',
-];
+    protected $fillable = [
+        'user_id',
+        'food_id',
+        'order_code',
+        'count_order',
+        'amount_price',
+        'payment',
+        'order_date',
+        'order_status',
+    ];
 
-// Relasi ke User (Setiap order dimiliki satu user)
-public function user(): BelongsTo
-{
-return $this->belongsTo(User::class, 'user_id');
-}
 
-// Relasi ke Food (Setiap order hanya memiliki satu makanan)
-public function food(): BelongsTo
-{
-return $this->belongsTo(Food::class, 'food_id');
-}
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($order) {
+            $order->order_code = 'ORD-' . Str::random(5) . '-' . time();
+        });
+    }
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class, 'food_id');
+    }
+
+    public function scopeFilter($query, $filters)
+    {
+        return $query->when($filters['month'] ?? false, fn ($q, $month) => $q->whereMonth('created_at', $month))
+                     ->when($filters['year'] ?? false, fn ($q, $year) => $q->whereYear('created_at', $year));
+    }
 }
